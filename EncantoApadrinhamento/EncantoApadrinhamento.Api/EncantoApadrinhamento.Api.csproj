@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EncantoApadrinhamento.Infra\EncantoApadrinhamento.Infra.csproj" />
+    <ProjectReference Include="..\EncantoApadrinhamento.Services\EncantoApadrinhamento.Services.csproj" />
   </ItemGroup>
 
 </Project>

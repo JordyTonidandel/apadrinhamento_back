@@ -1,4 +1,5 @@
 using EncantoApadrinhamento.Api.Configurations.DBConfig;
+using EncantoApadrinhamento.Api.Configurations.DependencyInjection;
 using EncantoApadrinhamento.Api.Configurations.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.UseIdentityConfiguration();
 builder.UseDBConfiguration();
+builder.UseDependencyInjectionConfiguration();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
