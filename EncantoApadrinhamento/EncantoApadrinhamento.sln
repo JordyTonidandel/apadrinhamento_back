@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncantoApadrinhamento.Api", "EncantoApadrinhamento.Api\EncantoApadrinhamento.Api.csproj", "{D73955B7-EAB3-4B39-889D-01153F273D7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncantoApadrinhamento.Core", "EncantoApadrinhamento.Core\EncantoApadrinhamento.Core.csproj", "{1F60D058-0829-47A4-859E-9422EA4611D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncantoApadrinhamento.Domain", "EncantoApadrinhamento.Domain\EncantoApadrinhamento.Domain.csproj", "{477B61F4-4182-49D2-9B30-226AC86EB4B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncantoApadrinhamento.Infra", "EncantoApadrinhamento.Infra\EncantoApadrinhamento.Infra.csproj", "{0C8692F8-C731-4C94-A4A3-0EF37E17A6A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncantoApadrinhamento.Services", "EncantoApadrinhamento.Services\EncantoApadrinhamento.Services.csproj", "{07FBE9A7-22E4-437D-AA53-2FE63E54646F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D73955B7-EAB3-4B39-889D-01153F273D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73955B7-EAB3-4B39-889D-01153F273D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73955B7-EAB3-4B39-889D-01153F273D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73955B7-EAB3-4B39-889D-01153F273D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F60D058-0829-47A4-859E-9422EA4611D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F60D058-0829-47A4-859E-9422EA4611D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F60D058-0829-47A4-859E-9422EA4611D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F60D058-0829-47A4-859E-9422EA4611D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{477B61F4-4182-49D2-9B30-226AC86EB4B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477B61F4-4182-49D2-9B30-226AC86EB4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477B61F4-4182-49D2-9B30-226AC86EB4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477B61F4-4182-49D2-9B30-226AC86EB4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8692F8-C731-4C94-A4A3-0EF37E17A6A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8692F8-C731-4C94-A4A3-0EF37E17A6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8692F8-C731-4C94-A4A3-0EF37E17A6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8692F8-C731-4C94-A4A3-0EF37E17A6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07FBE9A7-22E4-437D-AA53-2FE63E54646F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FBE9A7-22E4-437D-AA53-2FE63E54646F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FBE9A7-22E4-437D-AA53-2FE63E54646F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FBE9A7-22E4-437D-AA53-2FE63E54646F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0368A65-A8E5-4F05-9132-7A0F97C6A7C1}
+	EndGlobalSection
+EndGlobal
