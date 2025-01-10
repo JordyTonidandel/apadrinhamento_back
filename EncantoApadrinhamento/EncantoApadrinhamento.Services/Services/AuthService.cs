@@ -40,6 +40,9 @@ namespace EncantoApadrinhamento.Services.Services
 
                 var userRoles = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
 
+                if (!userRoles.Any())
+                    throw new DomainException("Nenhuma role encontrada para este usuário");
+
                 return _tokenService.GenerateToken(user, userRoles);
             }
             else

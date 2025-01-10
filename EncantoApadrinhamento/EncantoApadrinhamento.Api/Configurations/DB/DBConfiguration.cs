@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Infra.Context;
+﻿using EncantoApadrinhamento.Api.Configurations.DB;
+using EncantoApadrinhamento.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace EncantoApadrinhamento.Api.Configurations.DBConfig
@@ -20,6 +21,22 @@ namespace EncantoApadrinhamento.Api.Configurations.DBConfig
                 {
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 });
+            }
+        }
+
+        public async static void UseDBSeederConfiguration(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+
+            var services = scope.ServiceProvider;
+            try
+            {
+                var seeder = services.GetRequiredService<DataBaseSeeder>();
+                await seeder.UseSeedAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao realizar o seed do banco: {ex.Message}");
             }
         }
     }

@@ -3,7 +3,7 @@
     public class DomainException : Exception
     {
         internal List<string> _errors = [];
-        internal List<string> Errors => _errors;
+        public List<string> Errors => _errors;
 
         public DomainException(List<string> errors) => _errors = errors;
 

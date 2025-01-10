@@ -38,7 +38,7 @@ namespace EncantoApadrinhamento.Services.Services
                 Audience = _configuration["Jwt:Audience"],
                 Issuer = _configuration["Jwt:Issuer"],
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddHours(int.Parse(_configuration["Jwt:HoursToExpire"]!)),
+                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:MinutesToExpire"]!)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                                    SecurityAlgorithms.HmacSha256Signature),
             };

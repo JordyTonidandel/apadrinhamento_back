@@ -1,6 +1,9 @@
+using EncantoApadrinhamento.Api.Configurations.Cors;
 using EncantoApadrinhamento.Api.Configurations.DBConfig;
 using EncantoApadrinhamento.Api.Configurations.DependencyInjection;
+using EncantoApadrinhamento.Api.Configurations.ExceptionHandler;
 using EncantoApadrinhamento.Api.Configurations.Identity;
+using EncantoApadrinhamento.Api.Configurations.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.UseIdentityConfiguration();
 builder.UseDBConfiguration();
+builder.UseCorsConfiguration();
+
 builder.UseDependencyInjectionConfiguration();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.UseSwaggerConfiguration();
 
 var app = builder.Build();
 
@@ -22,10 +27,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseDBSeederConfiguration();
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.MapControllers();
+app.UseExceptionHandlerConfiguration();
 
 app.Run();

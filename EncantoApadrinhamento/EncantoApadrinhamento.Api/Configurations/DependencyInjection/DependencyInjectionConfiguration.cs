@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Services.Interfaces;
+﻿using EncantoApadrinhamento.Api.Configurations.DB;
+using EncantoApadrinhamento.Services.Interfaces;
 using EncantoApadrinhamento.Services.Services;
 
 namespace EncantoApadrinhamento.Api.Configurations.DependencyInjection
@@ -10,6 +11,8 @@ namespace EncantoApadrinhamento.Api.Configurations.DependencyInjection
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+
+            builder.Services.AddScoped<DataBaseSeeder>();
         }
 
     }
