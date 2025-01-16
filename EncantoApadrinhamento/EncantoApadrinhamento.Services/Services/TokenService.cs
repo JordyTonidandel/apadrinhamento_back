@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Services.Interfaces;
+﻿using EncantoApadrinhamento.Domain.Entities;
+using EncantoApadrinhamento.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,12 +13,12 @@ namespace EncantoApadrinhamento.Services.Services
     {
         private readonly IConfiguration _configuration;
 
-        public TokenService(IConfiguration configuration, UserManager<IdentityUser> userManager)
+        public TokenService(IConfiguration configuration, UserManager<UserEntity> userManager)
         {
             _configuration = configuration;
         }
 
-        public string GenerateToken(IdentityUser user, IList<string> roles)
+        public string GenerateToken(UserEntity user, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 

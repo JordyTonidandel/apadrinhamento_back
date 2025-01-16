@@ -1,5 +1,6 @@
 ﻿using EncantoApadrinhamento.Core.CustomException;
 using EncantoApadrinhamento.Core.Util;
+using EncantoApadrinhamento.Domain.Entities;
 using EncantoApadrinhamento.Services.Interfaces;
 using EncantoApadrinhamento.Services.RequestModel.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -11,12 +12,12 @@ namespace EncantoApadrinhamento.Services.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<UserEntity> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
 
-        public AuthService(UserManager<IdentityUser> userManager, ITokenService tokenService, IEmailService emailService, IConfiguration configuration)
+        public AuthService(UserManager<UserEntity> userManager, ITokenService tokenService, IEmailService emailService, IConfiguration configuration)
         {
             _userManager = userManager;
             _tokenService = tokenService;
