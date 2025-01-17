@@ -22,6 +22,8 @@ namespace EncantoApadrinhamento.Infra.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AddressEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CompanyEntityConfiguration());
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

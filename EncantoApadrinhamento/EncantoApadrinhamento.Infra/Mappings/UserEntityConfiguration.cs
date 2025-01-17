@@ -23,12 +23,6 @@ namespace EncantoApadrinhamento.Infra.Mappings
             builder.Property(x => x.BirthDate)
                 .IsRequired()
                 .HasColumnType("date");
-
-            builder.HasOne(x => x.Address)
-                .WithOne()
-                .HasForeignKey<UserEntity>(x => x.Id)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired(false);
         }
     }
 }

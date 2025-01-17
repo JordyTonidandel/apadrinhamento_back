@@ -11,6 +11,9 @@
         public string Country { get; set; } = string.Empty;
         public string ZipCode { get; set; } = string.Empty;
 
-        public string UserId { get; set; } = string.Empty;
+        public string? UserId { get; set; } = string.Empty;
+        public virtual UserEntity? User { get; set; }
+
+
     }
 }
