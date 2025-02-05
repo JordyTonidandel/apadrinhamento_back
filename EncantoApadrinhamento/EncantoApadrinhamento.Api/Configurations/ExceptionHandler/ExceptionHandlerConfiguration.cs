@@ -60,8 +60,8 @@ namespace EncantoApadrinhamento.Api.Configurations.ExceptionHandler
                         problemDetails.Detail = argumentException.Message;
                     }
 
-                    ILogger logger = http.RequestServices.GetService(typeof(ILogger<Program>)) as ILogger<Program>;
-                    logger.LogError(error, message: error.Message);
+                    ILogger? logger = http.RequestServices.GetService(typeof(ILogger<Program>)) as ILogger<Program>;
+                    logger?.LogError(error, message: error.Message);
 
                     http.Response.StatusCode = problemDetails.Status.Value;
                     http.Response.WriteAsJsonAsync(problemDetails, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });

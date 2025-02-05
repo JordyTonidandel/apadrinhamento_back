@@ -3,6 +3,7 @@ using EncantoApadrinhamento.Api.Configurations.DBConfig;
 using EncantoApadrinhamento.Api.Configurations.DependencyInjection;
 using EncantoApadrinhamento.Api.Configurations.ExceptionHandler;
 using EncantoApadrinhamento.Api.Configurations.Identity;
+using EncantoApadrinhamento.Api.Configurations.Mappings;
 using EncantoApadrinhamento.Api.Configurations.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.UseDBConfiguration();
 builder.UseCorsConfiguration();
 
 builder.UseDependencyInjectionConfiguration();
+builder.UseMapsterConfiguration();
 builder.Services.AddEndpointsApiExplorer();
 builder.UseSwaggerConfiguration();
 

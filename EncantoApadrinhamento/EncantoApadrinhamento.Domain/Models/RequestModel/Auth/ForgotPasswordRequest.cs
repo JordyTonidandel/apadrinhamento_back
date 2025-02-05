@@ -1,4 +1,4 @@
-﻿namespace EncantoApadrinhamento.Services.RequestModel.Auth
+﻿namespace EncantoApadrinhamento.Domain.RequestModel.Auth
 {
     public class ForgotPasswordRequest
     {

@@ -1,8 +1,8 @@
 ﻿using EncantoApadrinhamento.Core.CustomException;
 using EncantoApadrinhamento.Core.Util;
 using EncantoApadrinhamento.Domain.Entities;
+using EncantoApadrinhamento.Domain.RequestModel.Auth;
 using EncantoApadrinhamento.Services.Interfaces;
-using EncantoApadrinhamento.Services.RequestModel.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;

@@ -1,4 +1,4 @@
-﻿using EncantoApadrinhamento.Services.RequestModel.Auth;
+﻿using EncantoApadrinhamento.Domain.RequestModel.Auth;
 
 namespace EncantoApadrinhamento.Services.Interfaces
 {

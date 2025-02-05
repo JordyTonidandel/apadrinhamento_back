@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ResponseModel\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.11" />
@@ -21,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EncantoApadrinhamento.Core\EncantoApadrinhamento.Core.csproj" />
     <ProjectReference Include="..\EncantoApadrinhamento.Domain\EncantoApadrinhamento.Domain.csproj" />
+    <ProjectReference Include="..\EncantoApadrinhamento.Infra\EncantoApadrinhamento.Infra.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ namespace EncantoApadrinhamento.Domain.Entities
         public string Description { get; set; } = string.Empty;
         public string Cnpj { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
-        public string Email { get; set; } 
+        public string Email { get; set; }  = string.Empty;
         public RegistrationStatusEnum RegistrationStatus { get; set; }
 
         public string? AddressId { get; set; } = string.Empty;

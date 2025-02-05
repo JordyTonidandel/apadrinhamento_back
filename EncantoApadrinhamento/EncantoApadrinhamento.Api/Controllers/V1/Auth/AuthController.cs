@@ -1,5 +1,5 @@
-﻿using EncantoApadrinhamento.Services.Interfaces;
-using EncantoApadrinhamento.Services.RequestModel.Auth;
+﻿using EncantoApadrinhamento.Domain.RequestModel.Auth;
+using EncantoApadrinhamento.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
