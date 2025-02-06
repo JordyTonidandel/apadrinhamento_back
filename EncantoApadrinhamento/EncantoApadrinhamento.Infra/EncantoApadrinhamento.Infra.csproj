@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EncantoApadrinhamento.Core\EncantoApadrinhamento.Core.csproj" />
     <ProjectReference Include="..\EncantoApadrinhamento.Domain\EncantoApadrinhamento.Domain.csproj" />
   </ItemGroup>
 

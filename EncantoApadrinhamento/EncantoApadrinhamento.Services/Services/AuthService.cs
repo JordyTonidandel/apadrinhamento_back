@@ -1,7 +1,9 @@
 ﻿using EncantoApadrinhamento.Core.CustomException;
 using EncantoApadrinhamento.Core.Util;
 using EncantoApadrinhamento.Domain.Entities;
+using EncantoApadrinhamento.Domain.Models.RequestModel.Auth;
 using EncantoApadrinhamento.Domain.RequestModel.Auth;
+using EncantoApadrinhamento.Domain.ResponseModel;
 using EncantoApadrinhamento.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -61,6 +63,43 @@ namespace EncantoApadrinhamento.Services.Services
 
                 throw new DomainException("Senha inválida");
             }
+        }
+
+        public async Task<UserResponse> RegisterAsync(RegisterRequest registerDTO)
+        {
+            var user = new UserEntity
+            {
+                UserName = Util.GenerateNickName(registerDTO.Name, registerDTO.LastName),
+                Email = registerDTO.Email,
+                Cpf = registerDTO.Cpf,
+                Name = registerDTO.Name,
+                LastName = registerDTO.LastName
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDTO.Password).ConfigureAwait(false);
+
+            if (result.Succeeded)
+            {
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user).ConfigureAwait(false);
+
+                var code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+                var confirmationLink = $"{_configuration["Base:Url"]}/api/v1/auth/confirm-email/{user.Id}?token={code}";
+
+                await _emailService.SendEmailAsync(user.Email!, "Confirmação de email", TemplatesEmail.ConfirmacaoEmail(user.UserName!, confirmationLink), true).ConfigureAwait(false);
+
+                return new UserResponse() 
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Cpf = user.Cpf
+                };
+
+            }
+            else
+                throw new DomainException("Erro ao cadastrar usuário favor contatar o administrador do sistema");
         }
 
         public async Task<bool> ConfirmEmailAsync(Guid id, string confirmToken)

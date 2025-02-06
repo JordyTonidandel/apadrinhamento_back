@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Domain.Entities;
+﻿using EncantoApadrinhamento.Core.Enums;
+using EncantoApadrinhamento.Domain.Entities;
 using EncantoApadrinhamento.Domain.Pagination;
 using EncantoApadrinhamento.Domain.ResponseModel;
 using Microsoft.AspNetCore.Identity;

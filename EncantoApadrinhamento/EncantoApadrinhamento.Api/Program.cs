@@ -1,3 +1,5 @@
+using EncantoApadrinhamento.Api.Configurations.Authentication;
+using EncantoApadrinhamento.Api.Configurations.Authorization;
 using EncantoApadrinhamento.Api.Configurations.Cors;
 using EncantoApadrinhamento.Api.Configurations.DBConfig;
 using EncantoApadrinhamento.Api.Configurations.DependencyInjection;
@@ -9,16 +11,17 @@ using EncantoApadrinhamento.Api.Configurations.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.UseIdentityConfiguration();
 builder.UseDBConfiguration();
 builder.UseCorsConfiguration();
+builder.UseAuthenticationConfiguration();
+builder.UseAuthorizationConfiguration();
 
 builder.UseDependencyInjectionConfiguration();
 builder.UseMapsterConfiguration();
-builder.Services.AddEndpointsApiExplorer();
 builder.UseSwaggerConfiguration();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

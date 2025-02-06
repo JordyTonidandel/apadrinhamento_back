@@ -1,5 +1,7 @@
-﻿using EncantoApadrinhamento.Domain.Entities;
+﻿using EncantoApadrinhamento.Core.Enums;
+using EncantoApadrinhamento.Domain.Entities;
 using EncantoApadrinhamento.Domain.Pagination;
+using EncantoApadrinhamento.Domain.RequestModel;
 using EncantoApadrinhamento.Domain.ResponseModel;
 using EncantoApadrinhamento.Infra.Interfaces;
 using EncantoApadrinhamento.Services.Interfaces;
@@ -47,9 +49,24 @@ namespace EncantoApadrinhamento.Services.Services
             return await _userRepository.ExistsByIdAsync(userId, cancellationToken);
         }
 
-        public async Task<IdentityResult> CreateUserAsync(UserEntity user, CancellationToken cancellationToken)
+        public async Task<IdentityResult> CreateUserAsync(CreateUserRequest userRequest, CancellationToken cancellationToken)
         {
-            return await _userRepository.CreateAsync(user, cancellationToken);
+            var user = new UserEntity
+            {
+                Name = userRequest.Name,
+                LastName = userRequest.LastName,
+                BirthDate = userRequest.BirthDate,
+                Cpf = userRequest.Cpf,
+                Email = userRequest.Email,
+                UserName = userRequest.Email,
+                PhoneNumber = userRequest.PhoneNumber
+            };
+
+            var userCreated = await _userRepository.CreateAsync(user, cancellationToken);
+
+            await _userRepository.AddToRoleAsync(user.Id, userRequest.UserRole.ToString(), cancellationToken);
+
+            return userCreated;
         }
 
         public async Task<IdentityResult> UpdateUserAsync(UserEntity user, CancellationToken cancellationToken)

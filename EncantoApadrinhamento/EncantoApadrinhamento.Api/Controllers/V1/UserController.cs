@@ -1,5 +1,7 @@
-﻿using EncantoApadrinhamento.Domain.Entities;
+﻿using EncantoApadrinhamento.Core.Enums;
+using EncantoApadrinhamento.Domain.Entities;
 using EncantoApadrinhamento.Domain.Pagination;
+using EncantoApadrinhamento.Domain.RequestModel;
 using EncantoApadrinhamento.Domain.ResponseModel;
 using EncantoApadrinhamento.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EncantoApadrinhamento.Api.Controllers.V1
 {
     [ApiController]
+    [Authorize(Policy = "Administrator")]
     [Route("api/v1/user")]
     [Produces("application/json")]
     public class UserController : ApiControllerBase
@@ -27,7 +30,6 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
             return Ok(retorno);
         }
 
-        [Authorize(Roles = "admin,owner")]
         [HttpGet("{userId}")]
         public async Task<ActionResult<UserResponse>> GetAsync(string userId)
         {
@@ -45,15 +47,18 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserEntity user)
+        public async Task<ActionResult> CreateUserAsync([FromBody] CreateUserRequest createUser)
         {
-            var retorno = await _userService.CreateUserAsync(user, Request.HttpContext.RequestAborted).ConfigureAwait(false);
+            if (createUser.UserRole == Enums.Role.Owner)
+                return BadRequest("this role is not allowed to be created");
+
+            var retorno = await _userService.CreateUserAsync(createUser, Request.HttpContext.RequestAborted).ConfigureAwait(false);
 
             return Ok(retorno);
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] UserEntity user)
+        public async Task<ActionResult> UpdateUserAsync([FromBody] UserEntity user)
         {
             var retorno = await _userService.UpdateUserAsync(user, Request.HttpContext.RequestAborted).ConfigureAwait(false);
 
@@ -61,7 +66,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
         }
 
         [HttpDelete]
-        public async Task<ActionResult> Delete(string userId)
+        public async Task<ActionResult> DeleteUserAsync(string userId)
         {
             var retorno = await _userService.DeleteUserAsync(userId, Request.HttpContext.RequestAborted).ConfigureAwait(false);
 
@@ -70,7 +75,8 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
 
         [HttpPost]
         [Route("role")]
-        public async Task<ActionResult> AddToRole(string userId, string role)
+        [Authorize(Roles = "Owner")]
+        public async Task<ActionResult> AddUserToRoleAsync(string userId, string role)
         {
             await _userService.AddUserToRoleAsync(userId, role, Request.HttpContext.RequestAborted).ConfigureAwait(false);
 
@@ -79,6 +85,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
 
         [HttpDelete]
         [Route("role")]
+        [Authorize(Roles = "Owner")]
         public async Task<ActionResult> RemoveFromRole(string userId, string role)
         {
             await _userService.RemoveUserFromRoleAsync(userId, role, Request.HttpContext.RequestAborted).ConfigureAwait(false);
@@ -87,6 +94,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1
         }
 
         [HttpGet("{userId}/roles")]
+        [Authorize(Roles = "Owner")]
         public async Task<ActionResult<IList<string>>> GetRoles(string userId)
         {
             var retorno = await _userService.GetUserRolesAsync(userId, Request.HttpContext.RequestAborted).ConfigureAwait(false);

@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Domain.RequestModel.Auth;
+﻿using EncantoApadrinhamento.Domain.Models.RequestModel.Auth;
+using EncantoApadrinhamento.Domain.RequestModel.Auth;
 using EncantoApadrinhamento.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest login)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequest login)
         {
             string? clientIP = HttpContext?.Connection?.RemoteIpAddress?.ToString();
 
@@ -43,9 +44,19 @@ namespace EncantoApadrinhamento.Api.Controllers.V1.Auth
             });
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("register")]
+        public async Task<ActionResult> RegisterAsync([FromBody] RegisterRequest register)
+        {
+            await _authService.RegisterAsync(register).ConfigureAwait(false);
+
+            return Ok("Usuário cadastrado com sucesso!");
+        }
+
         [HttpPost]
         [Route("refresh-token")]
-        public async Task<ActionResult> RefreshToken()
+        public async Task<ActionResult> RefreshTokenAsync()
         {
             var userId = HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -61,7 +72,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("confirm-email/{id:guid}")]
-        public async Task<ActionResult> ConfirmEmail([FromRoute] Guid id, [FromQuery] string token)
+        public async Task<ActionResult> ConfirmEmailAsync([FromRoute] Guid id, [FromQuery] string token)
         {
             await _authService.ConfirmEmailAsync(id, token).ConfigureAwait(false);
 
@@ -71,7 +82,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("forgot-password")]
-        public async Task<ActionResult> ResetPassword([FromBody] ForgotPasswordRequest esqueciMinhaSenhaRequest)
+        public async Task<ActionResult> ForgotPasswordAsync([FromBody] ForgotPasswordRequest esqueciMinhaSenhaRequest)
         {
             await _authService.ForgotPasswordAsync(esqueciMinhaSenhaRequest).ConfigureAwait(false);
 
@@ -81,7 +92,7 @@ namespace EncantoApadrinhamento.Api.Controllers.V1.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("reset-password")]
-        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest resetSenhaRequest)
+        public async Task<ActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest resetSenhaRequest)
         {
             await _authService.ResetPasswordAsync(resetSenhaRequest).ConfigureAwait(false);
 

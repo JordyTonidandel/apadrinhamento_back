@@ -7,7 +7,7 @@ namespace EncantoApadrinhamento.Domain.Entities
         public string Name { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Cpf { get; set; } = string.Empty;
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public virtual AddressEntity? Address { get; set; }
         public virtual CompanyEntity? Company { get; set; }

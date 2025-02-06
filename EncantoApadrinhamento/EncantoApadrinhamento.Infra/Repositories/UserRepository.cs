@@ -1,4 +1,5 @@
-﻿using EncantoApadrinhamento.Domain.Entities;
+﻿using EncantoApadrinhamento.Core.Enums;
+using EncantoApadrinhamento.Domain.Entities;
 using EncantoApadrinhamento.Domain.Pagination;
 using EncantoApadrinhamento.Domain.ResponseModel;
 using EncantoApadrinhamento.Infra.Extensions;
@@ -31,7 +32,7 @@ namespace EncantoApadrinhamento.Infra.Repositories
                     Email = u.Email!,
                     Name = u.Name,
                     PhoneNumber = u.PhoneNumber!,
-                    BirthDate = u.BirthDate,
+                    BirthDate = u.BirthDate!.Value,
                     Cpf = u.Cpf,
                     LastName = u.LastName,
                     NickName = u.UserName
@@ -51,7 +52,7 @@ namespace EncantoApadrinhamento.Infra.Repositories
                     Email = u.Email!,
                     Name = u.Name,
                     PhoneNumber = u.PhoneNumber!,
-                    BirthDate = u.BirthDate,
+                    BirthDate = u.BirthDate!.Value,
                     Cpf = u.Cpf,
                     LastName = u.LastName,
                     NickName = u.UserName
@@ -69,7 +70,7 @@ namespace EncantoApadrinhamento.Infra.Repositories
                     Email = u.Email!,
                     Name = u.Name,
                     PhoneNumber = u.PhoneNumber!,
-                    BirthDate = u.BirthDate,
+                    BirthDate = u.BirthDate!.Value,
                     Cpf = u.Cpf,
                     LastName = u.LastName,
                     NickName = u.UserName
@@ -88,7 +89,7 @@ namespace EncantoApadrinhamento.Infra.Repositories
                     Email = u.Email!,
                     Name = u.Name,
                     PhoneNumber = u.PhoneNumber!,
-                    BirthDate = u.BirthDate,
+                    BirthDate = u.BirthDate!.Value,
                     Cpf = u.Cpf,
                     LastName = u.LastName,
                     NickName = u.UserName
@@ -122,9 +123,12 @@ namespace EncantoApadrinhamento.Infra.Repositories
 
         public async Task<IdentityResult> DeleteAsync(string userId, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId) ?? throw new KeyNotFoundException("User not found");
 
-            return user == null ? throw new KeyNotFoundException("User not found") : await _userManager.DeleteAsync(user);
+            if (await _userManager.IsInRoleAsync(user, "Owner"))
+                throw new InvalidOperationException("User cannot be deleted");
+
+            return await _userManager.DeleteAsync(user);
         }
 
         public async Task AddToRoleAsync(string userId, string role, CancellationToken cancellationToken)
